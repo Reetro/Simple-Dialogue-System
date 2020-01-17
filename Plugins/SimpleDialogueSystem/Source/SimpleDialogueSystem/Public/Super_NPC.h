@@ -46,7 +46,7 @@ public:
   float TextSpeed;
 
   /* Whether to require input from player to continue dialogue */
-  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "!bStartOnOverlap"))
   bool bRequireInput;
 
   UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
