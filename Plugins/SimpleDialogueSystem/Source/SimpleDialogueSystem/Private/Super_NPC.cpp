@@ -1,5 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+// Copyright 2020, Justin Wells, All rights reserved.
 
 #include "Super_NPC.h"
 #include "Components/BoxComponent.h"
