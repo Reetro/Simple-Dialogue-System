@@ -19,16 +19,16 @@ public:
    AGamepad_Controller();
   
   /** Can be called to check and see if the player is currently using a gamepad */
-  UPROPERTY(Transient, BlueprintReadOnly)
+  UPROPERTY(Transient, BlueprintReadOnly, Category = "Gamepad Settings")
   bool bIsUsingGamepad;
 
   /** Specifies whether we set `bIsUsingGamepad` to `false` if we receive no input for a period of time. If set to 'true', GamepadTimeout will control how long
       we need to go without receiving input before we set `bIsUsingGamepad` to `false`. */
-  UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+  UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Gamepad Settings")
   bool bResetGamepadDetectionAfterNoInput;
 
   /** How long we can go without receiving a gamepad input before we assume they've stopped using the gamepad */
-  UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (EditCondition = "bResetGamepadDetectionAfterNoInput"))
+  UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Gamepad Settings", meta = (EditCondition = "bResetGamepadDetectionAfterNoInput"))
   float GamepadTimeout;
 
   // Overrides
@@ -56,6 +56,6 @@ protected:
   }
 
   // Used to keep track of when we last saw gamepad input
-  UPROPERTY(Transient, BlueprintReadOnly)
+  UPROPERTY(Transient, BlueprintReadOnly, Category = "Gamepad Settings")
   float LastGamepadInputTime;
 };
