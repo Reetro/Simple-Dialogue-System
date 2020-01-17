@@ -24,7 +24,16 @@ ASuper_NPC::ASuper_NPC()
   DefaultScreenDelay = DialogueScreenDelay;
 
   bRequireInput = false;
-  bStartOnOverlap = false;
+  bStartOnOverlap = true;
+
+  if (bRequireInput)
+  {
+    bStartOnOverlap = false;
+  }
+  else if (bStartOnOverlap)
+  {
+    bRequireInput = false;
+  }
 
   InputKeyKeyboard = EKeys::E;
   InputKeyController = EKeys::Gamepad_FaceButton_Left;
