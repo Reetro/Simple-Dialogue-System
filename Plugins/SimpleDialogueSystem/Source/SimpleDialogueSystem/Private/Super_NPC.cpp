@@ -71,3 +71,13 @@ void ASuper_NPC::BeginPlay()
     return;
   }
 }
+
+const float ASuper_NPC::GetDefaultTextSpeed()
+{
+  return DefaultTextSpeed;
+}
+
+const float ASuper_NPC::GetDefaultScreenDelay()
+{
+  return DefaultScreenDelay;
+}

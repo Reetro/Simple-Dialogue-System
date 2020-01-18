@@ -24,12 +24,15 @@ public:
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
   USoundCue* DialogueSound;
 
+  /* The camera that is used during dialogue */
   UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
   UCameraComponent* DialogueCamera;
 
-  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera Blend Settings", meta = (MakeEditWidget = true))
+  /* The transform of the Dialogue Camera relative to the NPC */
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera Blend Settings", meta = (MakeEditWidget = true, EditCondition = "bUseDialogueCamera"))
   FTransform CameraTransform;
 
+  /* The name of the NPC shown on the dialogue widget */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
   FText NPCName;
 
@@ -41,35 +44,26 @@ public:
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialogue Settings", meta = (EditCondition = "!bRequireInput"))
   float DialogueScreenDelay;
 
-  /* The speed of each letter being printed to screen */
+  /* The delay between each letter being printed to the screen */
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialogue Settings")
   float TextSpeed;
 
-  /* Whether to require input from player to continue dialogue */
+  /* Whether or not to require input from the player to continue dialogue */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "!bStartOnOverlap"))
   bool bRequireInput;
-
-  UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
-  bool bInputKeyPressed;
-
-  UPROPERTY(BlueprintReadOnly, Category = "Dialogue Settings")
-  float DefaultTextSpeed;
 
   /* Whether or not dialogue should start when overlapping the dialogue trigger or should wait for a given input */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "!bRequireInput"))
   bool bStartOnOverlap;
 
-  UPROPERTY(BlueprintReadOnly, Category = "Dialogue Settings")
-  float DefaultScreenDelay;
-
   UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
   UBoxComponent* DialogueTrigger;
 
-  /* This key used to continue dialogue if RequireInput is true if no controller is detected this key is used*/
+  /* This key used to continue dialogue if RequireInput is true if no controller is detected this key is used */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bRequireInput"))
   FKey InputKeyKeyboard;
 
-  /* This key used to continue dialogue if RequireInput is true*/
+  /* This key used to continue dialogue if RequireInput is true and a gamepad is connected */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bRequireInput"))
   FKey InputKeyController;
 
@@ -77,23 +71,40 @@ public:
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
   TArray<FKey> SkipKeys;
 
+  UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
+  bool bInputKeyPressed;
+
+  /* This will create a dialogue widget and play text from the dialogue to say array until it reaches the end of the array will also disable player movement */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void StartDialogue();
 
+  /* Stop's dialogue and removes the widget from the screen */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void EndDialogue();
 
+  /* Sets the textspeed to 0 so there is no delay between letters being printed then sets the dialogue screen to 0.5 if RequireInput player will still need to press the input key to continue to the next dialogue screen */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void SkipDialogue();
 
+  /* Move's dialogue to the screen either waits for play input or pause and the specified time set in DialogueScreenDelay */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void ContinueDialogue();
 
+  /* Sends updates to NPC that player is using a gamepad so updates UI */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void UpdateKeyToController();
 
+  /* Sends updates to NPC that player is not using a gamepad so update UI this is also the default state of an NPC */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void UpdateKeyToKeyboard();
+
+  /* Returns the default value of TextSpeed set in the construction script */
+  UFUNCTION(BlueprintPure, Category = "Dialogue Functions")
+  const float GetDefaultTextSpeed();
+
+  /* Returns the default value of DialogueScreenDelay set in the construction script */
+  UFUNCTION(BlueprintPure, Category = "Dialogue Functions")
+  const float GetDefaultScreenDelay();
 
   UFUNCTION()
   void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -102,4 +113,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+
+  float DefaultTextSpeed;
+
+  float DefaultScreenDelay;
 };
