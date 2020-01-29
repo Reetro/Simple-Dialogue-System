@@ -48,6 +48,14 @@ public:
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialogue Settings")
   float TextSpeed;
 
+  /* Default value of TextSpeed */
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialogue Settings")
+  float DefaultTextSpeed;
+
+  /* Default value of DialogueScreenDelay */
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialogue Settings")
+  float DefaultDialogueScreenDelay;
+
   /* Whether or not to require input from the player to continue dialogue */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "!bStartOnOverlap"))
   bool bRequireInput;
@@ -98,24 +106,12 @@ public:
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void UpdateKeyToKeyboard();
 
-  /* Returns the default value of TextSpeed set in the construction script */
-  UFUNCTION(BlueprintPure, Category = "Dialogue Functions")
-  const float GetDefaultTextSpeed();
-
-  /* Returns the default value of DialogueScreenDelay set in the construction script */
-  UFUNCTION(BlueprintPure, Category = "Dialogue Functions")
-  const float GetDefaultScreenDelay();
-
   UFUNCTION()
   void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-private:
-
-  float DefaultTextSpeed;
-
-  float DefaultScreenDelay;
 };

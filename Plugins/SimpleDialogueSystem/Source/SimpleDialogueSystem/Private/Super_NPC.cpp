@@ -16,14 +16,11 @@ ASuper_NPC::ASuper_NPC()
   if (!ensure(DialogueTrigger != nullptr)) { return; }
   DialogueTrigger->SetupAttachment(RootComponent);
 
-  TextSpeed = 0.07f;
-  DialogueScreenDelay = 2.0f;
-
-  DefaultTextSpeed = TextSpeed;
-  DefaultScreenDelay = DialogueScreenDelay;
-
   bRequireInput = false;
   bStartOnOverlap = true;
+
+  TextSpeed = 0.07f;
+  DialogueScreenDelay = 2.0f;
 
   if (bRequireInput)
   {
@@ -63,6 +60,12 @@ void ASuper_NPC::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class
 void ASuper_NPC::BeginPlay()
 {
 	Super::BeginPlay();
+  
+  // if bStartOnOverlap and bRequireInput are false default npc to require input
+  if (!bRequireInput && !bStartOnOverlap)
+  {
+    bRequireInput = true;
+  }
 
   DialogueTrigger->OnComponentBeginOverlap.AddDynamic(this, &ASuper_NPC::OnOverlapBegin);
  
@@ -70,14 +73,4 @@ void ASuper_NPC::BeginPlay()
   {
     return;
   }
-}
-
-const float ASuper_NPC::GetDefaultTextSpeed()
-{
-  return DefaultTextSpeed;
-}
-
-const float ASuper_NPC::GetDefaultScreenDelay()
-{
-  return DefaultScreenDelay;
 }
