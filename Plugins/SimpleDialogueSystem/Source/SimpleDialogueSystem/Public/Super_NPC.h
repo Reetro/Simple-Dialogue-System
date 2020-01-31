@@ -29,7 +29,7 @@ public:
   UCameraComponent* DialogueCamera;
 
   /* The transform of the Dialogue Camera relative to the NPC */
-  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera Blend Settings", meta = (MakeEditWidget = true, EditCondition = "bUseDialogueCamera"))
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera Blend Settings", meta = (MakeEditWidget = true))
   FTransform CameraTransform;
 
   /* The name of the NPC shown on the dialogue widget */
