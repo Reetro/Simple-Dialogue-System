@@ -49,11 +49,11 @@ public:
   float TextSpeed;
 
   /* Default value of TextSpeed */
-  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialogue Settings")
+  UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
   float DefaultTextSpeed;
 
   /* Default value of DialogueScreenDelay */
-  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialogue Settings")
+  UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
   float DefaultDialogueScreenDelay;
 
   /* Whether or not to require input from the player to continue dialogue */
@@ -63,6 +63,17 @@ public:
   /* Whether or not dialogue should start when overlapping the dialogue trigger or should wait for a given input */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "!bRequireInput"))
   bool bStartOnOverlap;
+
+  /* Whether or not the last dialogue screen should ask the player a question this will make the choice 1 and choice 2 button's appear next the dialogue widget*/
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
+  bool bIsQuestText;
+  /* What the NPC will say if the player chose dialogue option 1 if blank dialogue will end */
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsQuestText"))
+  FText NPCDialogueOption1;
+
+  /* What the NPC will say if the player chose dialogue option 2 if blank dialogue will end */
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsQuestText"))
+  FText NPCDialogueOption2;
 
   UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
   UBoxComponent* DialogueTrigger;
@@ -89,10 +100,22 @@ public:
   /* Stop's dialogue and removes the widget from the screen */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void EndDialogue();
+  /* If player chose the first option then this event is called */
+  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
+  void ChoseOption1();
+  /* If player chose the second option this event is called */
+  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
+  void ChoseOption2();
 
   /* Sets the textspeed to 0 so there is no delay between letters being printed then sets the dialogue screen to 0.5 if RequireInput player will still need to press the input key to continue to the next dialogue screen */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void SkipDialogue();
+  /* First event called if player chose dialogue option 1 */
+  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
+  void ContinueToOption1();
+  /* First event called if player chose dialogue option 2 */
+  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
+  void ContinueToOption2();
 
   /* Move's dialogue to the screen either waits for play input or pause and the specified time set in DialogueScreenDelay */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
