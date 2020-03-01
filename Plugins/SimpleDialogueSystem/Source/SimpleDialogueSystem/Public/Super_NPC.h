@@ -56,6 +56,10 @@ public:
   UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
   float DefaultDialogueScreenDelay;
 
+  /* Weather or not the NPC is currently talking */
+  UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
+  bool bCurrentlyTalking;
+
   /* Whether or not to require input from the player to continue dialogue */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "!bStartOnOverlap"))
   bool bRequireInput;
@@ -64,7 +68,7 @@ public:
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "!bRequireInput"))
   bool bStartOnOverlap;
 
-  /* Whether or not the last dialogue screen should ask the player a question this will make the choice 1 and choice 2 button's appear next the dialogue widget*/
+  /* Whether or not the last dialogue screen should ask the player a question this will make the choice 1 and choice 2 button's appear next the dialogue widget */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
   bool bIsQuestText;
   /* What the NPC will say if the player chose dialogue option 1 if blank dialogue will end */
@@ -122,7 +126,7 @@ public:
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void ContinueToOption2();
 
-  /* Move's dialogue to the screen either waits for play input or pause and the specified time set in DialogueScreenDelay */
+  /* Moves dialogue to the screen either waits for play input or pause and the specified time set in DialogueScreenDelay */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void ContinueDialogue();
 
