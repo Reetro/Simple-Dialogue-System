@@ -24,6 +24,10 @@ public:
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
   USoundCue* DialogueSound;
 
+  /* Whether or not the talk cooldown is active */
+  UPROPERTY(BlueprintReadWrite , Category = "Dialogue Settings")
+  bool bTalkOnCooldown;
+
   /* The camera that is used during dialogue */
   UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
   UCameraComponent* DialogueCamera;
