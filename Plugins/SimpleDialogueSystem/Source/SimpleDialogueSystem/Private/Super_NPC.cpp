@@ -46,13 +46,19 @@ ASuper_NPC::ASuper_NPC()
   DialogueCamera->SetupAttachment(RootComponent);
 }
 
+void ASuper_NPC::ConstructDialogue_Implementation()
+{
+  bTalkOnCooldown = true;
+  StartDialogue();
+}
+
 void ASuper_NPC::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
   auto Player = UGameplayStatics::GetPlayerPawn(this, 0);
 
   if (bStartOnOverlap && OtherActor == Player)
   {
-    StartDialogue();
+    ConstructDialogue();
   }
 }
 

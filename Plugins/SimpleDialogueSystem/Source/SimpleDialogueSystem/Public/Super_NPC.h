@@ -74,7 +74,7 @@ public:
 
   /* Whether or not the last dialogue screen should ask the player a question this will make the choice 1 and choice 2 button's appear next the dialogue widget */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
-  bool bIsQuestText;
+  bool bIsMultiChoice;
   /* What the NPC will say if the player chose dialogue option 1 if blank dialogue will end */
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsQuestText"))
   FText NPCDialogueOption1;
@@ -106,6 +106,9 @@ public:
   UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
   bool bInputKeyPressed;
 
+  UPROPERTY(BlueprintReadWrite, Category = "Dialogue Settings")
+  bool bMultiChoiceKeyPressed;
+
   /* This will create a dialogue widget and play text from the dialogue to say array until it reaches the end of the array will also disable player movement */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void StartDialogue();
@@ -113,22 +116,26 @@ public:
   /* Stop's dialogue and removes the widget from the screen */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void EndDialogue();
-  /* If player chose the first option then this event is called */
-  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
-  void ChoseOption1();
-  /* If player chose the second option this event is called */
-  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
-  void ChoseOption2();
+
+  /* Is called before dialogue is started */
+  UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Dialogue Events")
+  void ConstructDialogue();
+  void ConstructDialogue_Implementation();
 
   /* Sets the textspeed to 0 so there is no delay between letters being printed then sets the dialogue screen to 0.5 if RequireInput player will still need to press the input key to continue to the next dialogue screen */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
   void SkipDialogue();
-  /* First event called if player chose dialogue option 1 */
+  /* Called when the player press a Dialogue button on the dialogue widget will update dialogue widget text */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
-  void ContinueToOption1();
-  /* First event called if player chose dialogue option 2 */
+  void UpdatePlayerChoice(bool bOption1, bool bOption2);
+
+  /* Called when player press a Dialogue button on the dialogue widget */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
-  void ContinueToOption2();
+  void OnPlayerChoice(bool bOption1, bool bOption2);
+
+  /* End Multi Choice dialogue screens */
+  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
+  void EndMultichoiceDialogue();
 
   /* Moves dialogue to the screen either waits for play input or pause and the specified time set in DialogueScreenDelay */
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Dialogue Events")
