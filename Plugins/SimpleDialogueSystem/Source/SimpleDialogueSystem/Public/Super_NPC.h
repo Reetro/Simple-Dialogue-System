@@ -76,16 +76,16 @@ public:
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings")
   bool bIsMultiChoice;
   /* What the NPC will say if the player chose dialogue option 1 if blank dialogue will end */
-  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsQuestText"))
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsMultiChoice"))
   FText NPCDialogueOption1;
   /* What the NPC will say if the player chose dialogue option 2 if blank dialogue will end */
-  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsQuestText"))
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsMultiChoice"))
   FText NPCDialogueOption2;
   /* The first dialogue option the player has */
-  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsQuestText"))
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsMultiChoice"))
   FText PlayerDialogueOption1;
   /* The second dialogue option the player has */
-  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsQuestText"))
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue Settings", meta = (EditCondition = "bIsMultiChoice"))
   FText PlayerDialogueOption2;
 
   UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
