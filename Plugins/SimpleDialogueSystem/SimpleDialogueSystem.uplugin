@@ -10,10 +10,9 @@
 	"DocsURL": "https://docs.google.com/document/d/1nYO1w7XsTbJPHp1hWNksMWIrgZjbYwosApPh54oVB68/edit?usp=sharing",
 	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/da24b9af87964d06abde44821e2b18fd",
 	"SupportURL": "",
+	"EngineVersion": "4.25.0",
 	"CanContainContent": true,
-	"IsBetaVersion": false,
-	"IsExperimentalVersion": false,
-	"Installed": false,
+	"Installed": true,
 	"Modules": [
 		{
 			"Name": "SimpleDialogueSystem",
