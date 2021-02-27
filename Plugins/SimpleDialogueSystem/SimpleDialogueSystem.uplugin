@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.1.2",
+	"VersionName": "1.1.3",
 	"FriendlyName": "SimpleDialogueSystem",
 	"Description": "The aim of this plugin is to create an easy to manage dialogue system. With full Gamepad and Keyboard support.",
 	"Category": "Blueprints",
@@ -10,8 +10,10 @@
 	"DocsURL": "https://docs.google.com/document/d/1nYO1w7XsTbJPHp1hWNksMWIrgZjbYwosApPh54oVB68/edit?usp=sharing",
 	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/da24b9af87964d06abde44821e2b18fd",
 	"SupportURL": "",
-	"EngineVersion": "4.25.0",
+	"EngineVersion": "4.26.0",
 	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
 	"Installed": true,
 	"Modules": [
 		{

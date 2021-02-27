@@ -12,18 +12,18 @@ AGamepad_Controller::AGamepad_Controller()
   GamepadTimeout = 5.f;
 }
 
-bool AGamepad_Controller::InputAxis(FKey Key, float Delta, float DeltaTime, int32 NumSamples, bool bGamepad)
+bool AGamepad_Controller::InputAxis(const FKey Key, const float Delta, const float DeltaTime, const int32 NumSamples, const bool bGamepad)
 {
-  bool ret = Super::InputAxis(Key, Delta, DeltaTime, NumSamples, bGamepad);
+  const bool bRet = Super::InputAxis(Key, Delta, DeltaTime, NumSamples, bGamepad);
   _UpdateGamepad(bGamepad);
-  return ret;
+  return bRet;
 }
 
-bool AGamepad_Controller::InputKey(FKey Key, EInputEvent EventType, float AmountDepressed, bool bGamepad)
+bool AGamepad_Controller::InputKey(const FKey Key, const EInputEvent EventType, const float AmountDepressed, const bool bGamepad)
 {
-  bool ret = Super::InputKey(Key, EventType, AmountDepressed, bGamepad);
+  const bool bRet = Super::InputKey(Key, EventType, AmountDepressed, bGamepad);
   _UpdateGamepad(bGamepad);
-  return ret;
+  return bRet;
 }
 
 void AGamepad_Controller::PlayerTick(float DeltaTime)
@@ -31,8 +31,8 @@ void AGamepad_Controller::PlayerTick(float DeltaTime)
   Super::PlayerTick(DeltaTime);
   if (IsLocalController() && bResetGamepadDetectionAfterNoInput && bIsUsingGamepad)
   {
-    float now = GetWorld()->TimeSeconds;
-    if (now > LastGamepadInputTime + GamepadTimeout)
+    const float Now = GetWorld()->TimeSeconds;
+    if (Now > LastGamepadInputTime + GamepadTimeout)
     {
       bIsUsingGamepad = false;
       ControllerDisconnected(); 

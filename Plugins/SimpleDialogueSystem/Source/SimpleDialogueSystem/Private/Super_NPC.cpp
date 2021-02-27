@@ -54,7 +54,7 @@ void ASuper_NPC::ConstructDialogue_Implementation()
 
 void ASuper_NPC::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-  auto Player = UGameplayStatics::GetPlayerPawn(this, 0);
+  const auto Player = UGameplayStatics::GetPlayerPawn(this, 0);
 
   if (bStartOnOverlap && OtherActor == Player)
   {
